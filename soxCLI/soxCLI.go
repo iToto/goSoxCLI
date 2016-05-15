@@ -30,8 +30,26 @@ func GetTrackInfo(path string) (FileInfo, error) {
 		return FileInfo{}, err
 	}
 
-	outString := string(out)
-	outArray := strings.Split(outString, "\n")
+	fileValues := parseFileInfoString(string(out))
+
+	file := FileInfo{
+		InputFile:      fileValues[0],
+		Channels:       fileValues[1],
+		SampleRate:     fileValues[2],
+		Precision:      fileValues[3],
+		Duration:       fileValues[4],
+		Samples:        fileValues[5],
+		Sectors:        fileValues[6],
+		FileSize:       fileValues[7],
+		BitRate:        fileValues[8],
+		SampleEncoding: fileValues[9],
+	}
+
+	return file, nil
+}
+
+func parseFileInfoString(fileInfoString string) ([10]string) {
+	outArray := strings.Split(fileInfoString, "\n")
 	outSlice := outArray[1 : len(outArray)-2]
 	insertIndex := 0
 	var fileValues [10]string
@@ -57,19 +75,5 @@ func GetTrackInfo(path string) (FileInfo, error) {
 			insertIndex++
 		}
 	}
-
-	file := FileInfo{
-		InputFile:      fileValues[0],
-		Channels:       fileValues[1],
-		SampleRate:     fileValues[2],
-		Precision:      fileValues[3],
-		Duration:       fileValues[4],
-		Samples:        fileValues[5],
-		Sectors:        fileValues[6],
-		FileSize:       fileValues[7],
-		BitRate:        fileValues[8],
-		SampleEncoding: fileValues[9],
-	}
-
-	return file, nil
+	return fileValues
 }
