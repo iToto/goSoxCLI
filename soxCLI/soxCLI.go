@@ -3,7 +3,6 @@
 package soxCLI
 
 import (
-	"fmt"
 	"log"
 	"os/exec"
 	"strings"
@@ -31,8 +30,6 @@ func GetTrackInfo(path string) (FileInfo, error) {
 		return FileInfo{}, err
 	}
 
-	fmt.Printf("Output: %s\n", out)
-
 	outString := string(out)
 	outArray := strings.Split(outString, "\n")
 	outSlice := outArray[1 : len(outArray)-2]
@@ -41,7 +38,6 @@ func GetTrackInfo(path string) (FileInfo, error) {
 
 	for _, element := range outSlice {
 		array := strings.Split(element, ": ")
-		fmt.Printf("Ket: %v\n", array[0])
 
 		if strings.TrimSpace(array[0]) == "Duration" {
 			splitDuration := strings.Split(array[1], "=")
