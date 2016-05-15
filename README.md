@@ -1,23 +1,25 @@
-#Audicut
+# goSoxCLI
 
-This will be a web application that will be able to take in an audio file, along with some meta data, and create a new edited version of the file.
+A go wrapper for the [SoX](http://sox.sourceforge.net) cli audio util.
 
-Sample input:
+***NB:*** *Must have sox installed and have the bin in your $PATH*
 
-```json
-SoundClip: {
-  "snippets": [
-    {
-      "start":"1:00",
-      "length":"1:00"
-    },
-    {
-      "start":"3:15",
-      "length":"0:45"
-    }
-  ],
-  "format": "MP3",
-  "outFileName": "foo",
-  "inFile": "<binary audio file>"
+# Usage
+```go
+import (
+	"github.com/iToto/audicut/soxCLI"
+	"log"
+)
+
+func main() {
+	path := "PATH_TO_FILE.wav"
+	file, err := soxCLI.GetTrackInfo(path)
+
+	if err != nil {
+		log.Fatalf("Could not get File Info for %s", path)
+	}
+
+	log.Printf("File: %v", file)
 }
+
 ```
