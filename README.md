@@ -23,3 +23,12 @@ func main() {
 }
 
 ```
+
+## TODO
+- [x] Get file information
+- [ ] Input desired interval in seconds: [0, 60]
+- [ ] Trim the audio file to desired interval.
+			eg: [0, 60] would return the first minute of audio file
+- [ ] Input multiple intervals: [[0, 60], [70, 120]]
+- [ ] Create new audio file by attaching intervals
+		eg: [[0, 60], [70, 120]] would return the first minute, skip 10 seconds, and attach the next 50 seconds.
